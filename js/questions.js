@@ -24,10 +24,20 @@ console.log(answerUser);
     {
         // si c'est la bonne réponse j'affiche dans ma console "CORRECT"
         console.log('CORRECT');
+        
+        // je récupère le noeud du DOM correspondant à l'id right et je le stocke dans ma variable rightAnswer
+        const rightAnswer = document.querySelector('#right .responses');
+        // puis avec textContent j'ajoute à mon noeud la question posée dont la réponse est vraie
+        rightAnswer.textContent = questions[0];
     }
     else
     {
         // sinon j'affiche "faux"
         console.log('faux');
+
+        // je récupère le noeud du DOM correspondant à l'id wrong et je le stocke dans ma variable wrongAnswer
+        const wrongAnswer = document.querySelector('#wrong .responses');
+        // puis avec textContent j'ajoute à mon noeud la question posée dont la réponse est fausse
+        wrongAnswer.textContent = questions[0];
     }
 
