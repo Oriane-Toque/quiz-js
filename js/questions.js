@@ -9,3 +9,6 @@ let responses = [
     72,
     3
 ];
+
+let counterRight = 0;
+let counterWrong = 0;

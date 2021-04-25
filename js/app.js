@@ -53,13 +53,17 @@ function checkResponse(index, responseUser)
     // sache quelle modification renvoyée
     checkCorrect = true;
     // je fais appel à ma fonction pour modification du DOM
+    counterRightWrong(checkCorrect);
     addResponseToDom(index, checkCorrect);
+    
   }
   else
   {
     window.alert("FAUX");
     checkCorrect = false;
+    counterRightWrong(checkCorrect);
     addResponseToDom(index, checkCorrect);
+    
   }
 }
 
@@ -76,6 +80,23 @@ function addResponseToDom(index, isCorrect)
   {
     document.querySelector('#wrong .responses').innerHTML += '<li>' + questions[index] + '</li>';
   }
+}
+
+// BONUS : fonction 4
+// cette fonction sert à créer un compteur des bonnes et mauvaises réponses
+function counterRightWrong(nbrCorrect)
+{
+  /* const pCounter = createElement('p'); */
+  if (nbrCorrect === true)
+  {
+    counterRight++;
+  }
+  else
+  {
+    counterWrong++;
+  }
+  document.querySelector('#right h2').textContent = counterRight;
+  document.querySelector('#wrong h2').textContent = counterWrong;
 }
 
 // 6ème étape : faire une fonction pour poser toutes les questions
