@@ -28,13 +28,7 @@ sinon c'est que la réponse est fausse
 function askQuestion(index)
 {
   // je pose la question à l'index correspondant
-  const response = window.prompt(questions[index]);
-
-  // j'affiche la réponse donnée
-  window.alert(response);
-
-  // appelle de la fonction checkResponse()
-  checkResponse(index, response);
+  return window.prompt(questions[index]);
 }
 
 // fonction 2
@@ -48,22 +42,17 @@ function checkResponse(index, responseUser)
   {
     // j'indique à l'utilisateur que sa réponse est juste
     window.alert("CORRECT");
+    scoreRight++;
     // je renvoie true dans ma variable checkCorrect
     // pour qu'ensuite ma fonction addResponseToDOM
     // sache quelle modification renvoyée
-    checkCorrect = true;
-    // je fais appel à ma fonction pour modification du DOM
-    counterRightWrong(checkCorrect);
-    addResponseToDom(index, checkCorrect);
-    
+    return true;
   }
   else
   {
     window.alert("FAUX");
-    checkCorrect = false;
-    counterRightWrong(checkCorrect);
-    addResponseToDom(index, checkCorrect);
-    
+    scoreWrong++;
+    return false;
   }
 }
 
@@ -74,6 +63,7 @@ function addResponseToDom(index, isCorrect)
 {
   if (isCorrect === true)
   {
+    // je rajoute chaque question où la réponse était juste
     document.querySelector('#right .responses').innerHTML += '<li>' + questions[index] + '</li>';
   }
   else
@@ -82,32 +72,40 @@ function addResponseToDom(index, isCorrect)
   }
 }
 
-// BONUS : fonction 4
-// cette fonction sert à créer un compteur des bonnes et mauvaises réponses
-function counterRightWrong(nbrCorrect)
+function counterResponse()
 {
-  /* const pCounter = createElement('p'); */
-  if (nbrCorrect === true)
+  if (!document.querySelector('#right p') || !document.querySelector('#right p'))
   {
-    counterRight++;
+    let counterRight = document.createElement('p');
+    counterRight.textContent = scoreRight;
+    document.querySelector('#right h2').append(counterRight);
+
+    let counterWrong = document.createElement('p');
+    counterWrong.textContent = scoreWrong;
+    document.querySelector('#wrong h2').append(counterWrong);
   }
   else
   {
-    counterWrong++;
+    document.querySelector('#right h2 p').textContent = scoreRight;
+    document.querySelector('#wrong h2 p').textContent = scoreWrong;
   }
-  document.querySelector('#right h2').textContent = counterRight;
-  document.querySelector('#wrong h2').textContent = counterWrong;
 }
 
 // 6ème étape : faire une fonction pour poser toutes les questions
 // à l'utilisateur #playQuiz
 function playQuiz()
 {
+  scoreRight = 0;
+  scoreWrong = 0;
+  document.querySelector('#right ul').textContent = "";
+  document.querySelector('#wrong ul').textContent = "";
   // yeah yeah j'ai besoin de récupérer toutes les questions de mon tableau
   // donc j'ai besoin de faire un boucle afin de parcourir mon tableau
   for(const index in questions)
   {
-    // je vais faire appel à ma fonction qui affiche les question
-    askQuestion(index);
+    const QUESTION = askQuestion(index);
+    const RESPONSE = checkResponse(index, QUESTION);
+    addResponseToDom(index, RESPONSE);
   }
+  counterResponse();
 }

@@ -10,5 +10,5 @@ let responses = [
     3
 ];
 
-let counterRight = 0;
-let counterWrong = 0;
+let scoreRight = 0;
+let scoreWrong = 0;
