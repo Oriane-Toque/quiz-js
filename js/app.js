@@ -41,7 +41,7 @@ function checkResponse(index, responseUser)
   if (Number(responseUser) === responses[index])
   {
     // j'indique à l'utilisateur que sa réponse est juste
-    window.alert("CORRECT");
+    console.log("CORRECT");
     scoreRight++;
     // je renvoie true dans ma variable checkCorrect
     // pour qu'ensuite ma fonction addResponseToDOM
@@ -50,7 +50,7 @@ function checkResponse(index, responseUser)
   }
   else
   {
-    window.alert("FAUX");
+    console.log("FAUX");
     scoreWrong++;
     return false;
   }
@@ -72,12 +72,18 @@ function addResponseToDom(index, isCorrect)
   }
 }
 
+// fonction 4
+// affichage compteurs des bonnes et mauvaises réponses
 function counterResponse()
 {
-  if (!document.querySelector('#right p') || !document.querySelector('#right p'))
+  // on vérifie si un élément p a déjà été créé pour affichage des scores
+  if (!document.querySelector('#right p') || !document.querySelector('#wrong p'))
   {
+    // si non alors on crée un élément p
     let counterRight = document.createElement('p');
+    // on attribut son contenu
     counterRight.textContent = scoreRight;
+    // et on cible ou on veut le positionner et on l'affiche
     document.querySelector('#right h2').append(counterRight);
 
     let counterWrong = document.createElement('p');
@@ -85,16 +91,20 @@ function counterResponse()
     document.querySelector('#wrong h2').append(counterWrong);
   }
   else
+  // sinon dans le cas que l'élément p a déjà été créé
   {
+    // on ecrase le contenu précédent pour les nouveaux scores
     document.querySelector('#right h2 p').textContent = scoreRight;
     document.querySelector('#wrong h2 p').textContent = scoreWrong;
   }
 }
 
+// fonction 5
 // 6ème étape : faire une fonction pour poser toutes les questions
 // à l'utilisateur #playQuiz
 function playQuiz()
 {
+  // on réinitialise à chaque nouvelle soumission du quiz
   scoreRight = 0;
   scoreWrong = 0;
   document.querySelector('#right ul').textContent = "";
@@ -107,5 +117,8 @@ function playQuiz()
     const RESPONSE = checkResponse(index, QUESTION);
     addResponseToDom(index, RESPONSE);
   }
+  // seule fonction qui ne nécessite pas de se retrouver dans la boucle
+  // on veut le score totale et non une énumération du score
+  // donc on sort de la boucle cette fonction
   counterResponse();
 }

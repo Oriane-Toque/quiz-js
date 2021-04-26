@@ -25,3 +25,11 @@ h3 {
     background-color: darkred;
     color: white;
 }
+
+button {
+    margin-top: 2.5rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    background-image: radial-gradient(circle, #142885, #002672, #00235e, #001e4b, #051937);
+    color: #fff;
+    font-weight: bold;
+}
