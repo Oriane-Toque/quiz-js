@@ -36,8 +36,6 @@ function askQuestion(index)
 // et la réponse fournie par l'utilisateur
 function checkResponse(index, responseUser)
 {
-  
-
   if (Number(responseUser) === responses[index])
   {
     // j'indique à l'utilisateur que sa réponse est juste
@@ -61,7 +59,8 @@ function checkResponse(index, responseUser)
 // fonction checkResponse en paramètres
 function addResponseToDom(index, isCorrect)
 {
-  if (isCorrect === true)
+  // vaut par défaut true
+  if (isCorrect)
   {
     // je rajoute chaque question où la réponse était juste
     document.querySelector('#right .responses').innerHTML += '<li>' + questions[index] + '</li>';
@@ -77,25 +76,25 @@ function addResponseToDom(index, isCorrect)
 function counterResponse()
 {
   // on vérifie si un élément p a déjà été créé pour affichage des scores
-  if (!document.querySelector('#right p') || !document.querySelector('#wrong p'))
+  if (!document.querySelector('#right span') || !document.querySelector('#wrong span'))
   {
-    // si non alors on crée un élément p
-    let counterRight = document.createElement('p');
-    // on attribut son contenu
-    counterRight.textContent = scoreRight;
-    // et on cible ou on veut le positionner et on l'affiche
+    // si non alors on crée un élément span
+    let counterRight = document.createElement('span');
+    // on affecte son contenu
+    counterRight.textContent = ' : ' + scoreRight;
+    // et on cible ou on veut le positionner et on ajoute le noeud au DOM
     document.querySelector('#right h2').append(counterRight);
 
-    let counterWrong = document.createElement('p');
-    counterWrong.textContent = scoreWrong;
+    let counterWrong = document.createElement('span');
+    counterWrong.textContent = ' : ' + scoreWrong;
     document.querySelector('#wrong h2').append(counterWrong);
   }
   else
-  // sinon dans le cas que l'élément p a déjà été créé
+  // sinon dans le cas où l'élément span a déjà été créé
   {
     // on ecrase le contenu précédent pour les nouveaux scores
-    document.querySelector('#right h2 p').textContent = scoreRight;
-    document.querySelector('#wrong h2 p').textContent = scoreWrong;
+    document.querySelector('#right h2 span').textContent = ' : ' + scoreRight;
+    document.querySelector('#wrong h2 span').textContent = ' : ' + scoreWrong;
   }
 }
 
