@@ -11,19 +11,20 @@ h3 {
 
 .container {
     display: flex;
-    justify-content: space-around;
 }
 
 #right {
     padding: 1rem 2rem;
     background-color: darkgreen;
     color: white;
+    flex-basis: 50%;
 }
 
 #wrong {
     padding: 1rem 2rem;
     background-color: darkred;
     color: white;
+    flex-basis: 50%;
 }
 
 button {
