@@ -67,7 +67,11 @@ function addResponseToDom(index, isCorrect)
   }
   else
   {
-    document.querySelector('#wrong .responses').innerHTML += '<li>' + questions[index] + '</li>';
+    // en cas de mauvaises réponses affichent dans un li la question
+    // puis dans un ul li > la réponse qui était attendue
+    document.querySelector('#wrong .responses').innerHTML += 
+    '<li>' + questions[index] + '<ul><li>' + 'La bonne réponse était : ' 
+    + responses[index] + '</li></ul>' + '</li>';
   }
 }
 
